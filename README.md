@@ -14,6 +14,9 @@ The webapp in this template is a nginx appliction. This can be switched out for 
 
 ## How to use
 
+`env_config.py` contains most parameters you would want to adjust. When customizing, go there first.
+
+
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
 This project is set up like a standard Python project.  The initialization process also creates
