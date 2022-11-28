@@ -28,8 +28,8 @@ class Tooling:
     codestar_connection_arn: str
 
 tooling = Tooling(
-    "jeremyritchie/webapp-ecs-quickstart-cdk",
-    "arn:aws:codestar-connections:ap-southeast-2:915922766016:connection/2086386e-a6b9-42de-873b-fb1de796170d",
+    github_repo="jeremyritchie/webapp-ecs-quickstart-cdk",
+    codestar_connection_arn="arn:aws:codestar-connections:ap-southeast-2:915922766016:connection/2086386e-a6b9-42de-873b-fb1de796170d",
 )
 
 environments: Dict[str, Environment] = {
