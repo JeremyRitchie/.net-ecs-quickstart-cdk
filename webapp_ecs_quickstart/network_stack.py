@@ -24,13 +24,18 @@ class NetworkStack(Stack):
             enable_dns_support=True,
             subnet_configuration=[
                 ec2.SubnetConfiguration(
-                    name="Public Subnet",
+                    name="Presentation Subnet",
                     subnet_type=ec2.SubnetType.PUBLIC,
                     cidr_mask=24
                 ),
                 ec2.SubnetConfiguration(
-                    name="Private Subnet",
+                    name="Application Subnet",
                     subnet_type=ec2.SubnetType.PRIVATE_WITH_EGRESS,
+                    cidr_mask=24
+                ),
+                ec2.SubnetConfiguration(
+                    name="Data Subnet",
+                    subnet_type=ec2.SubnetType.PRIVATE_ISOLATED,
                     cidr_mask=24
                 ),
             ],

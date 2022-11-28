@@ -80,7 +80,7 @@ class ComputeStack(Stack):
             target_group_name = f"target-group-{self.env.compute.app_name}-{env_name}",
             health_check=elb.HealthCheck(
                 enabled=True,
-                path="/ready"
+                path="/"
             ),
         )
 
