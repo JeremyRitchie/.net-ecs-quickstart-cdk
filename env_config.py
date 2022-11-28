@@ -28,7 +28,7 @@ class Tooling:
     codestar_connection_arn: str
 
 tooling = Tooling(
-    "jeremyritchie/dotnet-ecs-quickstart-cdk",
+    "jeremyritchie/webapp-ecs-quickstart-cdk",
     "arn:aws:codestar-connections:ap-southeast-2:915922766016:connection/2086386e-a6b9-42de-873b-fb1de796170d",
 )
 
@@ -38,8 +38,8 @@ environments: Dict[str, Environment] = {
             vpc_cidr_range="10.0.0.0/16",
         ),
         Compute(
-            app_name="dotnet-demo",
-            image="mcr.microsoft.com/dotnet/samples:dotnetapp"
+            app_name="webapp-demo",
+            image="nginxdemos/hello:latest"
         ),
         version_control_branch="main",
     ),
@@ -48,8 +48,8 @@ environments: Dict[str, Environment] = {
             vpc_cidr_range="10.1.0.0/16",
         ),
         Compute(
-            app_name="dotnet-demo",
-            image="mcr.microsoft.com/dotnet/samples:dotnetapp"
+            app_name="webapp-demo",
+            image="nginxdemos/hello:latest"
         ),
         version_control_branch="main",
     ),
@@ -58,8 +58,8 @@ environments: Dict[str, Environment] = {
             vpc_cidr_range="10.2.0.0/16",
         ),
         Compute(
-            app_name="dotnet-demo",
-            image="mcr.microsoft.com/dotnet/samples:dotnetapp"
+            app_name="webapp-demo",
+            image="nginxdemos/hello:latest"
         ),
         version_control_branch="main",
     ),

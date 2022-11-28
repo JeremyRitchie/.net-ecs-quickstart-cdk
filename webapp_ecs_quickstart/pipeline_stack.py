@@ -11,7 +11,7 @@ from aws_cdk import (
 )
 import aws_cdk as cdk
 
-from dotnet_ecs_quickstart.pipeline_stage import PipelineStage
+from webapp_ecs_quickstart.pipeline_stage import PipelineStage
 from env_config import tooling, environments
 
 
@@ -21,12 +21,12 @@ class PipelineStack(Stack):
     def __init__(self, scope: Construct, id: str, env_name: str, **kwargs) -> None:
         super().__init__(scope, id, **kwargs)
 
-        project = self.node.try_get_context("project_name")
+        project = environments[env_name].compute.app_name
 
         application_pipeline = pipelines.CodePipeline(
             self,
-            f"{project}-pipeline",
-            pipeline_name=f"{project}-{env_name}-pipeline",
+            "pipeline",
+            pipeline_name=f"pipeline-{project}-{env_name}",
             synth=pipelines.ShellStep(
                 "Synth",
                 input=pipelines.CodePipelineSource.connection(
@@ -42,14 +42,14 @@ class PipelineStack(Stack):
             ),
             publish_assets_in_parallel=False,
             cross_account_keys=True,
-            self_mutation=True,
+            self_mutation=False,
             docker_enabled_for_synth=True,
         )
 
         application_pipeline.add_stage(
             PipelineStage(
                 self,
-                f"{env_name}",
+                env_name,
                 env=cdk.Environment(
                     account=self.node.try_get_context(f"account:{env_name}"),
                     region=self.node.try_get_context(f"region:{env_name}"),

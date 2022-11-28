@@ -13,7 +13,7 @@ from aws_cdk import (
 
 from constructs import Construct
 from env_config import environments
-from dotnet_ecs_quickstart.network_stack import NetworkStack
+from webapp_ecs_quickstart.network_stack import NetworkStack
 
 class ComputeStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, network: NetworkStack, env_name, **kwargs) -> None:
@@ -23,7 +23,7 @@ class ComputeStack(Stack):
         self.env = environments[env_name]
         self.stack = 'container'
 
-        logs.LogGroup(
+        self.log_group = logs.LogGroup(
             self,
             "LogGroup",
             retention=logs.RetentionDays.THREE_MONTHS,
@@ -124,10 +124,14 @@ class ComputeStack(Stack):
             )
 
         self.task_definition.add_container(
-            ".Net Core Hello World",
+            "Nginx Hello World",
             image=ecs.ContainerImage.from_registry(self.env.compute.image),
-            port_mappings = [ecs.PortMapping(container_port=8080, host_port=8080)],
+            port_mappings = [ecs.PortMapping(container_port=80, host_port=80)],
             container_name = f"{self.env.compute.app_name}-{env_name}",
+            logging=ecs.AwsLogDriver(
+                stream_prefix=env_name,
+                mode=ecs.AwsLogDriverMode.NON_BLOCKING,
+                log_group=self.log_group)
         )
 
         self.cluster = ecs.Cluster(

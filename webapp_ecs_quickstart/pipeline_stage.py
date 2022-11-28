@@ -1,8 +1,8 @@
 import aws_cdk as cdk
 from constructs import Construct
 
-from dotnet_ecs_quickstart.network_stack import NetworkStack
-from dotnet_ecs_quickstart.compute_stack import ComputeStack
+from webapp_ecs_quickstart.network_stack import NetworkStack
+from webapp_ecs_quickstart.compute_stack import ComputeStack
 
 
 class PipelineStage(cdk.Stage):
