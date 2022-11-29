@@ -4,6 +4,8 @@ This is repo is intended to be widely reused as a quick-start template for ECS a
 
 The webapp in this template is a nginx appliction. This can be switched out for any type of application supported by docker & AWS Fargate.
 
+Read more about this repo and how you can best use it here: https://jeremyritchie.com/posts/6/
+
 ## Prerequisites
 
 * Python3
